@@ -29,10 +29,18 @@
 python scripts\check_env.py
 ```
 
+## 推理
+
+```powershell
+.venv\Scripts\python.exe scripts\detect_video.py --source 视频.mp4
+```
+
+支持视频、单张图片或图片目录；结果默认输出到 `runs/detect/<源名称>/`（带框视频/图片 + `detections.json`）。性能数据见 `docs/benchmark.md`。
+
 ## 进度
 
 - [x] 阶段 0：环境准备
-- [ ] 阶段 1：baseline 推理
+- [x] 阶段 1：baseline 推理（脚本完成，合成 1080p 冒烟测试通过；待真实校园视频复测）
 - [ ] 阶段 2：数据准备
 - [ ] 阶段 3：baseline 训练
 - [ ] 阶段 4：改进与消融
