@@ -1,0 +1,51 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- 虚拟环境 ---
+.venv/
+venv/
+
+# --- 权重 / 模型文件（体积大、可重新下载）---
+*.pt
+*.pth
+*.onnx
+*.engine
+*.trt
+wheels/
+
+# --- 数据与训练产物 ---
+datasets/*
+!datasets/.gitkeep
+runs/*
+!runs/.gitkeep
+!runs/**/.gitkeep
+
+# 处理输出（演示视频、截图、JSON 结果）
+outputs/
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# --- 数据库 / 缓存 ---
+*.db
+*.sqlite
+*.sqlite3
+*.log
+.env
+.env.*
+
+# --- 前端 ---
+node_modules/
+frontend/dist/
+
+# --- 编辑器 / 系统 ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

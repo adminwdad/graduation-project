@@ -1,0 +1,43 @@
+毕业设计 环境搭建记录
+====================
+
+【阶段 0 第 1 步】2026-11-02
+- 建目录：scripts/ configs/ datasets/ docs/ rules/ tests/ models/ runs/ backend/ frontend/
+- 建虚拟环境 .venv（Python 3.10.7）
+
+【阶段 0 第 2 步】依赖作用说明
+ultralytics    YOLOv8 官方库：加载 / 训练 / 推理 / 导出模型，内置 ByteTrack 跟踪
+opencv-python  视频读写、抽帧、画检测框、图像处理
+fastapi        Web 后端框架，提供 REST 接口，自动生成接口文档
+uvicorn        ASGI 服务器，用来运行 FastAPI
+sqlalchemy     数据库 ORM，操作 SQLite 中的任务 / 违规 / 用户表
+labelImg       图像标注工具，输出 YOLO 格式 txt 标签
+
+安装源：清华镜像 https://pypi.tuna.tsinghua.edu.cn/simple
+
+【阶段 0 第 2 步 结果】2026-11-02
+- 已装：ultralytics 8.4.198、opencv-python 5.0.0.93、fastapi 0.162.0、
+        uvicorn 0.54.0、sqlalchemy 2.0.55
+- labelImg 1.8.6：首次安装报 GBK 解码错误，包实际已装上；补装 wheel 后重试通过
+- 注意：ultralytics 自动拉的是 CPU 版 torch 2.14.1+cpu，必须换 CUDA 版
+
+【阶段 0 第 3 步】CUDA 版 PyTorch
+- 显卡：RTX 3050 Laptop，4GB 显存，驱动 596.21（支持 CUDA 13.2）
+- 选型：torch 2.9.1+cu128 + torchvision 0.24.1+cu128
+  （最新 torch 2.14.1 只有 cu130，但 Windows/Python3.10 没有配套 CUDA 版
+   torchvision，故退到稳定配对）
+- 下载源：实测官方源最快（3.5 MB/s）；SJTU 有 6 MB/s 但反复 SSL 报错；
+  阿里云仅 0.5 MB/s。最终用 curl 断点续传从官方源下载
+- 已装：torch 2.9.1+cu128、torchvision 0.24.1+cu128
+
+【阶段 0 第 4 步 验证】2026-11-02
+- torch.cuda.is_available() = True
+- GPU：NVIDIA GeForce RTX 3050 Ti Laptop GPU，显存 4096 MB，算力 sm_86
+- CUDA 12.8，cuDNN 91002
+- ultralytics 能加载 yolov8n.pt（80 类），权重已下载到项目根目录
+
+【阶段 0 交付物】2026-11-02
+- requirements.txt（pip freeze，54 个包）
+- scripts/check_env.py（环境自检）
+- docs/env-setup.md（安装步骤与踩坑记录）
+- wheels/（torch / torchvision 离线安装包，确认无误后可删，约 2.9GB）
